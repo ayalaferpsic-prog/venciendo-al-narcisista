@@ -6,12 +6,12 @@
   <title>Bienvenida — Tu espacio seguro</title>
   <style>
     :root {
-      --bg: linear-gradient(135deg,#f0f4f8,#e9f7ef); /* fondo suave */
-      --card: #ffffffcc;
-      --accent: #2b8a78; /* verde calmante */
-      --text: #073642; /* texto principal */
-      --text-secondary: #264b45; /* texto secundario */
-      --shadow: 0 8px 30px rgba(2,6,23,0.08);
+      --bg: #edf2f4; /* fondo sólido, suave */
+      --card: #ffffff; /* tarjeta blanca */
+      --accent: #3b6e6f; /* verde azulado sólido, menos chillón */
+      --text: #1b2a33; /* texto principal oscuro */
+      --text-secondary: #3c4a52; /* texto secundario */
+      --shadow: 0 6px 20px rgba(0,0,0,0.08);
       font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
     }
 
@@ -22,30 +22,33 @@
     }
 
     .card {
-      width:100%; max-width:880px; padding:40px; border-radius:18px;
+      width:100%; max-width:880px; padding:40px; border-radius:16px;
       background: var(--card); box-shadow: var(--shadow); text-align:center;
-      backdrop-filter: blur(6px);
     }
 
     h1 {margin:0; font-size:clamp(28px,6vw,56px); letter-spacing:-0.02em; color:var(--accent);}
     p {margin:18px 0 0; font-size:18px; color: var(--text-secondary);}
-    .small {font-size:14px; color:#264b45; margin-top:12px;}
+    .small {font-size:14px; color:#556b6b; margin-top:12px;}
     .enter-btn, .section-btn {
       margin-top:28px; background:var(--accent); color:white; border:0;
       padding:12px 22px; border-radius:12px; font-weight:600; cursor:pointer; font-size:16px;
-      box-shadow: 0 6px 18px rgba(43,138,120,0.18);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
     }
     .enter-btn:active, .section-btn:active {transform:translateY(1px);}
-    footer {margin-top:22px; font-size:13px; color:#2b6b61;}
+    footer {margin-top:22px; font-size:13px; color:#3c4a52;}
 
     .section {display:none; margin-top:30px; text-align:left;}
     .section h2 {color:var(--accent); margin-bottom:8px;}
     .video-container {margin-top:30px;}
     .video-container iframe {width:100%; max-height:450px; border-radius:12px;}
-
+    ul {margin-left:20px; color: var(--text-secondary);}
+    
     @media (prefers-color-scheme:dark){
-      :root {--bg:linear-gradient(135deg,#071218,#062423);--card:rgba(8,16,16,0.55);--accent:#7fe3c9;--text:#d7fff0;--text-secondary:#a0f0e0;}
-      .card {box-shadow: none;}
+      :root {
+        --bg: #121b1e; --card: #1c2b2e; --accent:#7fe3c9;
+        --text: #d7fff0; --text-secondary:#a0f0e0;
+      }
+      .card{box-shadow:none;}
     }
   </style>
 </head>
@@ -57,24 +60,43 @@
     <div class="small">Creado para uso educativo. Pulsa "Entrar" para continuar.</div>
     <button class="enter-btn" onclick="entrar()" aria-label="Entrar al espacio">Entrar</button>
 
-    <!-- Secciones ocultas que se muestran al entrar -->
     <div id="secciones" style="display:none;">
       <button class="section-btn" onclick="mostrarSeccion('narcisista')">¿Qué es un narcisista?</button>
       <button class="section-btn" onclick="mostrarSeccion('pareja')">¿Cómo saber si mi pareja es narcisista?</button>
 
+      <!-- Sección narcisista con información más clínica -->
       <div id="narcisista" class="section">
         <h2>¿Qué es un narcisista?</h2>
-        <p>Un narcisista es una persona que muestra un patrón de comportamiento caracterizado por la necesidad excesiva de admiración, falta de empatía y una preocupación excesiva por sí mismo.</p>
+        <p>Un narcisista presenta un patrón de comportamiento caracterizado por:</p>
+        <ul>
+          <li>Necesidad constante de admiración y validación.</li>
+          <li>Falta de empatía y dificultad para reconocer emociones ajenas.</li>
+          <li>Sensibilidad extrema a la crítica y reacción defensiva o agresiva.</li>
+          <li>Explotación de relaciones para beneficio propio.</li>
+          <li>Idealización inicial de las personas seguida de desvalorización.</li>
+          <li>Percepción exagerada de importancia personal.</li>
+        </ul>
+        <p>Estos rasgos forman parte del <strong>trastorno narcisista de la personalidad</strong> cuando afectan de manera significativa la vida personal, social o laboral.</p>
       </div>
 
+      <!-- Sección pareja narcisista con lista de 7 características -->
       <div id="pareja" class="section">
         <h2>¿Cómo saber si mi pareja es narcisista?</h2>
-        <p>Algunas señales incluyen: manipulación emocional, poca consideración por tus sentimientos, necesidad constante de atención y dificultad para aceptar críticas.</p>
+        <p>Algunas señales frecuentes incluyen:</p>
+        <ul>
+          <li>Necesidad constante de atención y admiración.</li>
+          <li>Falta de empatía y poco interés por tus sentimientos.</li>
+          <li>Manipulación emocional para obtener beneficios.</li>
+          <li>Celos o posesividad extrema.</li>
+          <li>Desvalorización de tus logros o talentos.</li>
+          <li>Dificultad para asumir responsabilidad o culpa.</li>
+          <li>Idealización inicial seguida de críticas o menosprecio.</li>
+        </ul>
       </div>
 
       <!-- Video de YouTube -->
       <div class="video-container">
-        <iframe src="https://www.youtube.com/watch?v=gXVRvBGfU5s&t=9s" title="Video sobre narcisismo" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/gXVRvBGfU5s&t=9s" title="Video sobre narcisismo" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
