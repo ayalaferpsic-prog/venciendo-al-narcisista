@@ -6,12 +6,13 @@
   <title>Bienvenida — Tu espacio seguro</title>
   <style>
     :root {
-      --bg: #edf2f4; /* fondo sólido, suave */
-      --card: #ffffff; /* tarjeta blanca */
-      --accent: #3b6e6f; /* verde azulado sólido, menos chillón */
-      --text: #1b2a33; /* texto principal oscuro */
-      --text-secondary: #3c4a52; /* texto secundario */
+      --bg: linear-gradient(to bottom, #edf2f4, #d8e2e6);
+      --card: #ffffff;
+      --accent: #3b6e6f;
+      --text: #1b2a33;
+      --text-secondary: #3c4a52;
       --shadow: 0 6px 20px rgba(0,0,0,0.08);
+      --tip-bg: #e0f7f5;
       font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
     }
 
@@ -23,30 +24,49 @@
 
     .card {
       width:100%; max-width:880px; padding:40px; border-radius:16px;
-      background: var(--card); box-shadow: var(--shadow); text-align:center;
+      background: var(--card); box-shadow: inset 0 0 15px rgba(0,0,0,0.02), var(--shadow);
+      text-align:center; opacity:0; transform:scale(0.97); transition: all 0.6s ease;
     }
+    .card.visible { opacity:1; transform:scale(1); }
 
-    h1 {margin:0; font-size:clamp(28px,6vw,56px); letter-spacing:-0.02em; color:var(--accent);}
-    p {margin:18px 0 0; font-size:18px; color: var(--text-secondary);}
-    .small {font-size:14px; color:#556b6b; margin-top:12px;}
+    h1 {
+      margin:0; font-size:clamp(28px,6vw,56px);
+      letter-spacing:-0.015em; line-height:1.2; color:var(--accent);
+    }
+    h2 {color:var(--accent); margin-bottom:8px; letter-spacing:-0.01em;}
+    p {margin:18px 0 0; font-size:18px; color: var(--text-secondary); font-weight:400; line-height:1.6;}
+    .small {font-size:14px; color:#556b6b; margin-top:12px; font-style:italic;}
+
     .enter-btn, .section-btn {
       margin-top:28px; background:var(--accent); color:white; border:0;
       padding:12px 22px; border-radius:12px; font-weight:600; cursor:pointer; font-size:16px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15); transition: all 0.3s ease;
+    }
+    .enter-btn:hover, .section-btn:hover {
+      background:#2c5c5d; transform:translateY(-2px) scale(1.02);
+      box-shadow:0 8px 20px rgba(0,0,0,0.2);
     }
     .enter-btn:active, .section-btn:active {transform:translateY(1px);}
+    .enter-btn:focus, .section-btn:focus { outline: 2px dashed var(--accent); outline-offset:3px; }
+
     footer {margin-top:22px; font-size:13px; color:#3c4a52;}
 
-    .section {display:none; margin-top:30px; text-align:left;}
-    .section h2 {color:var(--accent); margin-bottom:8px;}
+    .section {display:none; margin-top:30px; text-align:left; opacity:0; transition: opacity 0.5s ease;}
+    .section.visible {display:block; opacity:1;}
     .video-container {margin-top:30px;}
-    .video-container iframe {width:100%; max-height:450px; border-radius:12px;}
+    .video-container iframe {width:100%; max-height:450px; border-radius:12px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05);}
     ul {margin-left:20px; color: var(--text-secondary);}
     
+    .tip {
+      background: var(--tip-bg); padding:12px 18px; border-left:4px solid var(--accent);
+      border-radius:8px; margin:18px 0; font-style:italic; color: var(--text-secondary);
+    }
+
     @media (prefers-color-scheme:dark){
       :root {
-        --bg: #121b1e; --card: #1c2b2e; --accent:#7fe3c9;
-        --text: #d7fff0; --text-secondary:#a0f0e0;
+        --bg: linear-gradient(to bottom, #121b1e, #1c2b2e);
+        --card: #1c2b2e; --accent:#7fe3c9;
+        --text: #d7fff0; --text-secondary:#a0f0e0; --tip-bg:#0e2b2b;
       }
       .card{box-shadow:none;}
     }
@@ -64,7 +84,6 @@
       <button class="section-btn" onclick="mostrarSeccion('narcisista')">¿Qué es un narcisista?</button>
       <button class="section-btn" onclick="mostrarSeccion('pareja')">¿Cómo saber si mi pareja es narcisista?</button>
 
-      <!-- Sección narcisista con información más clínica -->
       <div id="narcisista" class="section">
         <h2>¿Qué es un narcisista?</h2>
         <p>Un narcisista presenta un patrón de comportamiento caracterizado por:</p>
@@ -76,10 +95,10 @@
           <li>Idealización inicial de las personas seguida de desvalorización.</li>
           <li>Percepción exagerada de importancia personal.</li>
         </ul>
+        <div class="tip">Recuerda: identificar estos rasgos te ayuda a proteger tu bienestar emocional.</div>
         <p>Estos rasgos forman parte del <strong>trastorno narcisista de la personalidad</strong> cuando afectan de manera significativa la vida personal, social o laboral.</p>
       </div>
 
-      <!-- Sección pareja narcisista con lista de 7 características -->
       <div id="pareja" class="section">
         <h2>¿Cómo saber si mi pareja es narcisista?</h2>
         <p>Algunas señales frecuentes incluyen:</p>
@@ -92,11 +111,11 @@
           <li>Dificultad para asumir responsabilidad o culpa.</li>
           <li>Idealización inicial seguida de críticas o menosprecio.</li>
         </ul>
+        <div class="tip">Tip: observar patrones repetitivos es más importante que incidentes aislados.</div>
       </div>
 
-      <!-- Video de YouTube -->
       <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/gXVRvBGfU5s&t=9s" title="Video sobre narcisismo" frameborder="0" allowfullscreen></iframe>
+        <iframe width="100%" height="450" src="https://www.youtube.com/embed/gXVRvBGfU5s?rel=0&modestbranding=1&showinfo=0" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -104,21 +123,29 @@
   </main>
 
   <script>
+    const card = document.querySelector('.card');
+    window.onload = () => { card.classList.add('visible'); }
+
     function entrar(){
       const btn = document.querySelector('.enter-btn');
       btn.textContent = 'Bienvenida ✨';
       btn.disabled = true;
       setTimeout(()=>{
         btn.style.display = 'none';
-        document.getElementById('secciones').style.display = 'block';
+        const secciones = document.getElementById('secciones');
+        secciones.style.display = 'block';
+        // animar secciones al aparecer
+        secciones.querySelectorAll('.section').forEach(sec => sec.classList.remove('visible'));
       },900);
     }
 
     function mostrarSeccion(id){
       const secciones = document.querySelectorAll('.section');
-      secciones.forEach(sec => sec.style.display='none');
-      document.getElementById(id).style.display = 'block';
-      window.scrollTo({top: document.getElementById(id).offsetTop - 20, behavior:'smooth'});
+      secciones.forEach(sec => { sec.style.display='none'; sec.classList.remove('visible'); });
+      const s = document.getElementById(id);
+      s.style.display='block';
+      setTimeout(()=> s.classList.add('visible'),50);
+      window.scrollTo({top: s.offsetTop - 20, behavior:'smooth'});
     }
   </script>
 </body>
