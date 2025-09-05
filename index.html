@@ -1,152 +1,361 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Bienvenida — Tu espacio seguro</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tu Espacio Seguro | Conecta y Sana</title>
+<meta name="description" content="Recursos y guías para entender y superar el comportamiento narcisista. Un lugar para sanar, conectar y recuperar tu bienestar emocional.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg-color: linear-gradient(to bottom, #f5f7f8, #e5ebed);
+    --card-bg: #ffffff;
+    --primary-color: #5d7e82;
+    --accent-color: #f7b267;
+    --text-color: #2c3e50;
+    --text-secondary: #586a7c;
+    --shadow-light: 0 4px 15px rgba(0,0,0,0.05);
+    --shadow-strong: 0 10px 30px rgba(0,0,0,0.12);
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
     :root {
-      --bg: linear-gradient(to bottom, #edf2f4, #d8e2e6);
-      --card: #ffffff;
-      --accent: #3b6e6f;
-      --text: #1b2a33;
-      --text-secondary: #3c4a52;
-      --shadow: 0 6px 20px rgba(0,0,0,0.08);
-      --tip-bg: #e0f7f5;
-      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+        --bg-color: #1a232f;
+        --card-bg: #2d3e50;
+        --primary-color: #72a39a;
+        --accent-color: #ffd8a1;
+        --text-color: #e0e6ec;
+        --text-secondary: #aeb9c4;
     }
+}
 
-    html, body {height:100%; margin:0;}
-    body {
-      display:grid; place-items:center; padding:24px;
-      background: var(--bg); color: var(--text);
-    }
+html, body { height: 100%; margin: 0; padding: 0; }
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background: var(--bg-color);
+    color: var(--text-color);
+    padding: 24px 12px;
+}
 
-    .card {
-      width:100%; max-width:880px; padding:40px; border-radius:16px;
-      background: var(--card); box-shadow: inset 0 0 15px rgba(0,0,0,0.02), var(--shadow);
-      text-align:center; opacity:0; transform:scale(0.97); transition: all 0.6s ease;
-    }
-    .card.visible { opacity:1; transform:scale(1); }
+.container {
+    width: 100%;
+    max-width: 950px;
+    background: var(--card-bg);
+    border-radius: 20px;
+    box-shadow: var(--shadow-strong);
+    padding: 40px;
+    transition: all 0.7s ease-out;
+    opacity: 0;
+    transform: translateY(20px);
+    position: relative;
+    overflow: hidden;
+}
+.container.visible { opacity: 1; transform: translateY(0); }
 
-    h1 {
-      margin:0; font-size:clamp(28px,6vw,56px);
-      letter-spacing:-0.015em; line-height:1.2; color:var(--accent);
-    }
-    h2 {color:var(--accent); margin-bottom:8px; letter-spacing:-0.01em;}
-    p {margin:18px 0 0; font-size:18px; color: var(--text-secondary); font-weight:400; line-height:1.6;}
-    .small {font-size:14px; color:#556b6b; margin-top:12px; font-style:italic;}
+/* TIPOGRAFÍA */
+h1, h2 { font-family: 'Playfair Display', serif; color: var(--primary-color); letter-spacing: -0.02em; }
+h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin: 0; line-height: 1.25; text-align: center; }
+h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-top: 2rem; margin-bottom: 0.8rem; }
+p, ul, li { font-size: 1.1rem; line-height: 1.9; color: var(--text-secondary); }
+.intro-text { text-align: center; margin-top: 1rem; font-size: 1.2rem; }
+.small-print { font-size: 0.85rem; color: var(--text-secondary); font-style: italic; margin-top: 1rem; text-align: center; }
 
-    .enter-btn, .section-btn {
-      margin-top:28px; background:var(--accent); color:white; border:0;
-      padding:12px 22px; border-radius:12px; font-weight:600; cursor:pointer; font-size:16px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.15); transition: all 0.3s ease;
-    }
-    .enter-btn:hover, .section-btn:hover {
-      background:#2c5c5d; transform:translateY(-2px) scale(1.02);
-      box-shadow:0 8px 20px rgba(0,0,0,0.2);
-    }
-    .enter-btn:active, .section-btn:active {transform:translateY(1px);}
-    .enter-btn:focus, .section-btn:focus { outline: 2px dashed var(--accent); outline-offset:3px; }
+/* BOTONES */
+.nav-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 2rem; }
+.btn { background: var(--primary-color); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 50px; font-size: 1rem; font-weight: 600; cursor: pointer; box-shadow: var(--shadow-light); transition: all 0.3s ease; }
+.btn:hover { background: var(--accent-color); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
+.btn:focus { outline: 3px solid var(--accent-color); outline-offset: 4px; }
 
-    footer {margin-top:22px; font-size:13px; color:#3c4a52;}
+/* SECCIONES */
+.content-section { display: none; opacity: 0; transform: translateY(15px); transition: all 0.5s ease; padding: 1.5rem 0; position: relative; }
+.content-section.active { display: block; opacity: 1; transform: translateY(0); }
 
-    .section {display:none; margin-top:30px; text-align:left; opacity:0; transition: opacity 0.5s ease;}
-    .section.visible {display:block; opacity:1;}
-    .video-container {margin-top:30px;}
-    .video-container iframe {width:100%; max-height:450px; border-radius:12px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05);}
-    ul {margin-left:20px; color: var(--text-secondary);}
-    
-    .tip {
-      background: var(--tip-bg); padding:12px 18px; border-left:4px solid var(--accent);
-      border-radius:8px; margin:18px 0; font-style:italic; color: var(--text-secondary);
-    }
+/* TIPS */
+.tip { background: var(--primary-color); color: white; padding: 1rem 1.5rem; border-left: 5px solid var(--accent-color); border-radius: 10px; font-style: italic; margin-top: 1.5rem; }
+li::before { content: "•"; color: var(--accent-color); font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; }
 
-    @media (prefers-color-scheme:dark){
-      :root {
-        --bg: linear-gradient(to bottom, #121b1e, #1c2b2e);
-        --card: #1c2b2e; --accent:#7fe3c9;
-        --text: #d7fff0; --text-secondary:#a0f0e0; --tip-bg:#0e2b2b;
-      }
-      .card{box-shadow:none;}
-    }
-  </style>
+/* VIDEO RESPONSIVO */
+.video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; margin-top: 2rem; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-strong); }
+.video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+/* REFLEXIÓN / CHECKLIST */
+.reflection, .checklist-section { background: #f0f4f7; border-left: 5px solid var(--accent-color); padding: 1rem 1.5rem; border-radius: 12px; margin: 1.5rem 0; font-style: italic; color: var(--text-secondary); }
+.reflection input[type="checkbox"], .checklist-section input[type="checkbox"], .reflection input[type="radio"], .checklist-section input[type="radio"] { margin-right: 0.5rem; }
+.result-box { margin-top: 1rem; padding: 1rem; border-radius: 12px; background: #f0f4f7; border-left: 5px solid var(--accent-color); font-style: italic; display: none; }
+
+/* TIMELINE FASES */
+.timeline { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 1rem; }
+.timeline-item { background: #f5f7f8; border-left: 4px solid var(--accent-color); padding: 1rem 1.5rem; border-radius: 10px; position: relative; cursor:pointer; }
+.timeline-item::before { content: ""; position: absolute; left: -9px; top: 10px; width: 12px; height: 12px; background: var(--accent-color); border-radius: 50%; }
+
+/* FOOTER */
+footer { margin-top: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-secondary); }
+</style>
 </head>
 
 <body>
-  <main class="card" role="main" aria-labelledby="bienvenida">
-    <h1 id="bienvenida">BIENVENIDA A TU ESPACIO SEGURO</h1>
-    <p>Este es tu lugar para informarte, respirar y recuperar la calma. Siéntete libre de explorar con confianza.</p>
-    <div class="small">Creado para uso educativo. Pulsa "Entrar" para continuar.</div>
-    <button class="enter-btn" onclick="entrar()" aria-label="Entrar al espacio">Entrar</button>
+<main class="container">
 
-    <div id="secciones" style="display:none;">
-      <button class="section-btn" onclick="mostrarSeccion('narcisista')">¿Qué es un narcisista?</button>
-      <button class="section-btn" onclick="mostrarSeccion('pareja')">¿Cómo saber si mi pareja es narcisista?</button>
+<!-- INTRO -->
+<section class="intro-section" data-section="intro">
+<h1>Bienvenida/o a Tu Espacio Seguro</h1>
+<p class="intro-text">Un refugio para informarte, sanar y recuperar tu voz. Navega con calma y confianza.</p>
+<div class="small-print">Recursos creados con fines educativos y de apoyo.</div>
+<div class="nav-buttons">
+    <button class="btn" data-target="narcisista">¿Qué es un narcisista?</button>
+    <button class="btn" data-target="pareja">¿Mi pareja es narcisista?</button>
+    <button class="btn" data-target="fases">Fases de la relación</button>
+    <button class="btn" data-target="sanar">Pasos para Sanar</button>
+    <button class="btn" data-target="recursos">Recursos y Testimonios</button>
+</div>
+</section>
 
-      <div id="narcisista" class="section">
-        <h2>¿Qué es un narcisista?</h2>
-        <p>Un narcisista presenta un patrón de comportamiento caracterizado por:</p>
-        <ul>
-          <li>Necesidad constante de admiración y validación.</li>
-          <li>Falta de empatía y dificultad para reconocer emociones ajenas.</li>
-          <li>Sensibilidad extrema a la crítica y reacción defensiva o agresiva.</li>
-          <li>Explotación de relaciones para beneficio propio.</li>
-          <li>Idealización inicial de las personas seguida de desvalorización.</li>
-          <li>Percepción exagerada de importancia personal.</li>
-        </ul>
-        <div class="tip">Recuerda: identificar estos rasgos te ayuda a proteger tu bienestar emocional.</div>
-        <p>Estos rasgos forman parte del <strong>trastorno narcisista de la personalidad</strong> cuando afectan de manera significativa la vida personal, social o laboral.</p>
-      </div>
+<!-- SECCIÓN NARCISISTA -->
+<section class="content-section" data-section="narcisista">
+<h2>¿Qué es un narcisista?</h2>
+<p>El término <strong>narcisista</strong> describe a alguien con un patrón centrado en sí mismo. A continuación se listan rasgos comunes:</p>
+<ul>
+<li>Necesidad profunda y constante de admiración</li>
+<li>Falta de empatía</li>
+<li>Percepción exagerada de importancia personal</li>
+<li>Sensibilidad extrema a la crítica</li>
+<li>Explotación de relaciones para beneficio propio</li>
+<li>Idealización inicial seguida de desvalorización</li>
+</ul>
 
-      <div id="pareja" class="section">
-        <h2>¿Cómo saber si mi pareja es narcisista?</h2>
-        <p>Algunas señales frecuentes incluyen:</p>
-        <ul>
-          <li>Necesidad constante de atención y admiración.</li>
-          <li>Falta de empatía y poco interés por tus sentimientos.</li>
-          <li>Manipulación emocional para obtener beneficios.</li>
-          <li>Celos o posesividad extrema.</li>
-          <li>Desvalorización de tus logros o talentos.</li>
-          <li>Dificultad para asumir responsabilidad o culpa.</li>
-          <li>Idealización inicial seguida de críticas o menosprecio.</li>
-        </ul>
-        <div class="tip">Tip: observar patrones repetitivos es más importante que incidentes aislados.</div>
-      </div>
+<div class="reflection">
+<strong>Reflexión sobre tu pareja:</strong> Marca la opción que más se asemeje a tu experiencia, identificada/o:<br><br>
 
-      <div class="video-container">
-        <iframe width="100%" height="450" src="https://www.youtube.com/embed/gXVRvBGfU5s?rel=0&modestbranding=1&showinfo=0" frameborder="0" allowfullscreen></iframe>
-      </div>
-    </div>
+<div>
+<strong>1. Necesidad profunda y constante de admiración</strong><br>
+<label><input type="radio" name="r1" value="1"> Esto me recuerda mucho a mi pareja</label><br>
+<label><input type="radio" name="r1" value="0.5"> Esto me recuerda un poco a mi pareja</label><br>
+<label><input type="radio" name="r1" value="0"> Esto no me recuerda nada a mi pareja</label>
+</div>
 
-    <footer aria-hidden="true">&copy; Tu espacio seguro</footer>
-  </main>
+<div>
+<strong>2. Falta de empatía notable</strong><br>
+<label><input type="radio" name="r2" value="1"> Esto me recuerda mucho a mi pareja</label><br>
+<label><input type="radio" name="r2" value="0.5"> Esto me recuerda un poco a mi pareja</label><br>
+<label><input type="radio" name="r2" value="0"> Esto no me recuerda nada a mi pareja</label>
+</div>
 
-  <script>
-    const card = document.querySelector('.card');
-    window.onload = () => { card.classList.add('visible'); }
+<div>
+<strong>3. Sensibilidad extrema a la crítica</strong><br>
+<label><input type="radio" name="r3" value="1"> Esto me recuerda mucho a mi pareja</label><br>
+<label><input type="radio" name="r3" value="0.5"> Esto me recuerda un poco a mi pareja</label><br>
+<label><input type="radio" name="r3" value="0"> Esto no me recuerda nada a mi pareja</label>
+</div>
 
-    function entrar(){
-      const btn = document.querySelector('.enter-btn');
-      btn.textContent = 'Bienvenida ✨';
-      btn.disabled = true;
-      setTimeout(()=>{
-        btn.style.display = 'none';
-        const secciones = document.getElementById('secciones');
-        secciones.style.display = 'block';
-        // animar secciones al aparecer
-        secciones.querySelectorAll('.section').forEach(sec => sec.classList.remove('visible'));
-      },900);
-    }
+<div>
+<strong>4. Explotación de relaciones para beneficio propio</strong><br>
+<label><input type="radio" name="r4" value="1"> Esto me recuerda mucho a mi pareja</label><br>
+<label><input type="radio" name="r4" value="0.5"> Esto me recuerda un poco a mi pareja</label><br>
+<label><input type="radio" name="r4" value="0"> Esto no me recuerda nada a mi pareja</label>
+</div>
 
-    function mostrarSeccion(id){
-      const secciones = document.querySelectorAll('.section');
-      secciones.forEach(sec => { sec.style.display='none'; sec.classList.remove('visible'); });
-      const s = document.getElementById(id);
-      s.style.display='block';
-      setTimeout(()=> s.classList.add('visible'),50);
-      window.scrollTo({top: s.offsetTop - 20, behavior:'smooth'});
-    }
-  </script>
+<div>
+<strong>5. Idealización inicial seguida de desvalorización</strong><br>
+<label><input type="radio" name="r5" value="1"> Esto me recuerda mucho a mi pareja</label><br>
+<label><input type="radio" name="r5" value="0.5"> Esto me recuerda un poco a mi pareja</label><br>
+<label><input type="radio" name="r5" value="0"> Esto no me recuerda nada a mi pareja</label>
+</div>
+
+<div>
+<strong>6. Percepción exagerada de importancia personal</strong><br>
+<label><input type="radio" name="r6" value="1"> Esto me recuerda mucho a mi pareja</label><br>
+<label><input type="radio" name="r6" value="0.5"> Esto me recuerda un poco a mi pareja</label><br>
+<label><input type="radio" name="r6" value="0"> Esto no me recuerda nada a mi pareja</label>
+</div>
+</div>
+
+<button class="btn mt-2" id="narcisista-btn">Ver resultado</button>
+<div class="result-box" id="narcisista-result"></div>
+<div class="nav-buttons">
+<button class="btn" data-target="intro">Regresar</button>
+</div>
+</section>
+
+<!-- SECCIÓN PAREJA -->
+<section class="content-section" data-section="pareja">
+<h2>¿Cómo saber si mi pareja es narcisista?</h2>
+<p>En una relación, el comportamiento narcisista puede manifestarse como idealización inicial seguida de desvalorización. Algunas señales:</p>
+<ul>
+<li>Bombardeo de amor inicial</li>
+<li>Falta de reciprocidad emocional</li>
+<li>Manipulación o gaslighting</li>
+<li>Celos o control excesivo</li>
+<li>Dificultad para asumir responsabilidad</li>
+<li>Desvalorización de logros o talentos</li>
+<li>Inestabilidad emocional en interacciones</li>
+<li>Criticas constantes y comparaciones</li>
+</ul>
+
+<div class="checklist-section">
+<strong>Reflexión sobre tu relación:</strong> Marca las opciones que aplican, identificada/o:<br><br>
+<div>
+<label><input type="checkbox" value="1"> Reconozco varias de estas conductas en mi pareja</label><br>
+<label><input type="checkbox" value="0.5"> Algunas conductas me resultan familiares</label><br>
+<label><input type="checkbox" value="0"> Ninguna de estas conductas aplica</label>
+</div>
+</div>
+
+<div class="video-wrapper">
+<iframe src="https://www.youtube.com/embed/gXVRvBGfU5s?rel=0&modestbranding=1" title="Video sobre narcisismo" allowfullscreen></iframe>
+</div>
+
+<button class="btn mt-2" id="pareja-btn">Ver resultado</button>
+<div class="result-box" id="checklist-result"></div>
+<div class="nav-buttons">
+<button class="btn" data-target="intro">Regresar</button>
+</div>
+</section>
+
+<!-- SECCIÓN FASES -->
+<section class="content-section" data-section="fases">
+<h2>Fases de la relación con un narcisista</h2>
+<div class="timeline">
+<div class="timeline-item">Idealización: todo parece perfecto, admiración intensa.</div>
+<div class="timeline-item">Devaluación: pequeñas fallas se exageran, críticas frecuentes.</div>
+<div class="timeline-item">Descarte: desapego abrupto, manipulación emocional intensa.</div>
+</div>
+<div class="reflection">
+<strong>Reflexiona:</strong> ¿Te has identificado/o en alguna fase de la relación?
+<label><input type="checkbox" value="1"> Sí, varias fases</label><br>
+<label><input type="checkbox" value="0.5"> Parcialmente</label><br>
+<label><input type="checkbox" value="0"> No me identifico</label>
+</div>
+<button class="btn mt-2" id="phases-btn">Ver resultado</button>
+<div class="result-box" id="phases-result"></div>
+<div class="nav-buttons">
+<button class="btn" data-target="intro">Regresar</button>
+</div>
+</section>
+
+<!-- SECCIÓN SANAR -->
+<section class="content-section" data-section="sanar">
+<h2>Pasos para Sanar</h2>
+<ul>
+<li>Establece límites claros</li>
+<li>Reconecta contigo misma/o</li>
+<li>Busca apoyo profesional</li>
+<li>Cuida tu bienestar emocional</li>
+<li>Permítete sentir y celebrar avances</li>
+</ul>
+<div class="reflection">
+<strong>Reflexión personal:</strong> ¿Estás aplicando algunos de estos pasos?
+<label><input type="checkbox" value="1"> Sí, aplico varios</label><br>
+<label><input type="checkbox" value="0.5"> Parcialmente</label><br>
+<label><input type="checkbox" value="0"> No los aplico</label>
+</div>
+<button class="btn mt-2" id="habits-btn">Ver resultado</button>
+<div class="result-box" id="habits-result"></div>
+<div class="nav-buttons">
+<button class="btn" data-target="intro">Regresar</button>
+</div>
+</section>
+
+<!-- SECCIÓN RECURSOS -->
+<section class="content-section" data-section="recursos">
+<h2>Recursos y Testimonios</h2>
+<ul>
+<li>Libros y guías confiables sobre narcisismo</li>
+<li>Testimonios de personas que han sanado relaciones tóxicas</li>
+<li>Enlaces a videos educativos y conferencias</li>
+<li>Organizaciones de apoyo</li>
+</ul>
+<div class="reflection">
+<strong>Reflexión:</strong> ¿Estos recursos te resultan útiles, identificada/o?
+<label><input type="checkbox" value="1"> Sí, todos</label><br>
+<label><input type="checkbox" value="0.5"> Algunos</label><br>
+<label><input type="checkbox" value="0"> No mucho</label>
+</div>
+<button class="btn mt-2" id="recursos-btn">Ver resultado</button>
+<div class="result-box" id="recursos-result"></div>
+<div class="nav-buttons">
+<button class="btn" data-target="intro">Regresar</button>
+</div>
+</section>
+
+</main>
+<footer>&copy; Tu Espacio Seguro</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', ()=> {
+    document.querySelector('.container').classList.add('visible');
+
+    const showSection = (targetId)=>{
+        const sections = document.querySelectorAll('.content-section, .intro-section');
+        sections.forEach(sec=>sec.classList.remove('active'));
+        const target = document.querySelector(`[data-section="${targetId}"]`);
+        if(target) target.classList.add('active');
+        window.scrollTo({top:0, behavior:'smooth'});
+    };
+
+    const calculateResult = (container)=>{
+        const inputs = container.querySelectorAll('input[type="checkbox"], input[type="radio"]');
+        let score=0;
+        inputs.forEach(i=>{ if(i.checked) score+=parseFloat(i.value)||0; });
+        return score;
+    };
+
+    const displayResult = (id, score, max)=>{
+        const box=document.getElementById(id);
+        const ratio=score/max;
+        let message="";
+        if(ratio<=0.33) message="Baja coincidencia: pocos patrones se observan en tu pareja o relación, identificada/o.";
+        else if(ratio<=0.66) message="Coincidencia moderada: algunos patrones se observan, reflexiona y protege tu bienestar, identificada/o.";
+        else message="Alta coincidencia: varios patrones se identifican, cuida tu bienestar y busca apoyo si lo necesitas, identificada/o.";
+        box.textContent=message;
+        box.style.display='block';
+        box.scrollIntoView({behavior:'smooth'});
+    };
+
+    // Sección NARCISISTA
+    document.getElementById('narcisista-btn').addEventListener('click', ()=>{
+        const score = calculateResult(document.querySelector('[data-section="narcisista"] .reflection'));
+        displayResult('narcisista-result', score, 6);
+    });
+
+    // Sección PAREJA
+    document.getElementById('pareja-btn').addEventListener('click', ()=>{
+        const score = calculateResult(document.querySelector('[data-section="pareja"] .checklist-section'));
+        displayResult('checklist-result', score, 8);
+    });
+
+    // SECCIÓN FASES
+    document.getElementById('phases-btn').addEventListener('click', ()=>{
+        const score = calculateResult(document.querySelector('[data-section="fases"] .reflection'));
+        displayResult('phases-result', score, 1); // un ítem
+    });
+
+    // SECCIÓN SANAR
+    document.getElementById('habits-btn').addEventListener('click', ()=>{
+        const score = calculateResult(document.querySelector('[data-section="sanar"] .reflection'));
+        displayResult('habits-result', score, 5);
+    });
+
+    // SECCIÓN RECURSOS
+    document.getElementById('recursos-btn').addEventListener('click', ()=>{
+        const score = calculateResult(document.querySelector('[data-section="recursos"] .reflection'));
+        displayResult('recursos-result', score, 4);
+    });
+
+    // Navegación botones
+    document.body.addEventListener('click', (event)=>{
+        const btn = event.target.closest('.btn[data-target]');
+        if(btn) showSection(btn.getAttribute('data-target'));
+    });
+
+    showSection('intro');
+});
+</script>
 </body>
 </html>
