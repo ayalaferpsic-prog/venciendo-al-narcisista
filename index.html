@@ -5,39 +5,51 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Bienvenida — Tu espacio seguro</title>
   <style>
-    :root{
-      --bg: linear-gradient(135deg,#f8f9fa,#e9f7ef);
-      --card:#ffffffcc;
-      --accent:#2b8a78;
-      --text:#073642;
+    :root {
+      --bg: linear-gradient(135deg,#f0f4f8,#e9f7ef); /* fondo suave */
+      --card: #ffffffcc;
+      --accent: #2b8a78; /* verde calmante */
+      --text: #073642; /* texto principal */
+      --text-secondary: #264b45; /* texto secundario */
       --shadow: 0 8px 30px rgba(2,6,23,0.08);
       font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
     }
-    html,body{height:100%;margin:0}
-    body{
-      display:grid;place-items:center;padding:24px;background:var(--bg);color:var(--text);
+
+    html, body {height:100%; margin:0;}
+    body {
+      display:grid; place-items:center; padding:24px;
+      background: var(--bg); color: var(--text);
     }
-    .card{
-      width:100%;max-width:880px;padding:40px;border-radius:18px;background:var(--card);box-shadow:var(--shadow);text-align:center;
+
+    .card {
+      width:100%; max-width:880px; padding:40px; border-radius:18px;
+      background: var(--card); box-shadow: var(--shadow); text-align:center;
       backdrop-filter: blur(6px);
     }
-    h1{margin:0;font-size:clamp(28px,6vw,56px);letter-spacing:-0.02em;color:var(--accent);}
-    p{margin:18px 0 0;font-size:18px;opacity:.95}
-    .small{font-size:14px;color:#264b45;margin-top:12px}
-    .enter-btn, .section-btn{
-      margin-top:28px;background:var(--accent);color:white;border:0;padding:12px 22px;border-radius:12px;font-weight:600;cursor:pointer;font-size:16px;
+
+    h1 {margin:0; font-size:clamp(28px,6vw,56px); letter-spacing:-0.02em; color:var(--accent);}
+    p {margin:18px 0 0; font-size:18px; color: var(--text-secondary);}
+    .small {font-size:14px; color:#264b45; margin-top:12px;}
+    .enter-btn, .section-btn {
+      margin-top:28px; background:var(--accent); color:white; border:0;
+      padding:12px 22px; border-radius:12px; font-weight:600; cursor:pointer; font-size:16px;
       box-shadow: 0 6px 18px rgba(43,138,120,0.18);
     }
-    .enter-btn:active, .section-btn:active{transform:translateY(1px);}
-    footer{margin-top:22px;font-size:13px;color:#2b6b61}
-    .section{display:none; margin-top:30px; text-align:left;}
-    .section h2{color:var(--accent); margin-bottom:8px;}
+    .enter-btn:active, .section-btn:active {transform:translateY(1px);}
+    footer {margin-top:22px; font-size:13px; color:#2b6b61;}
+
+    .section {display:none; margin-top:30px; text-align:left;}
+    .section h2 {color:var(--accent); margin-bottom:8px;}
+    .video-container {margin-top:30px;}
+    .video-container iframe {width:100%; max-height:450px; border-radius:12px;}
+
     @media (prefers-color-scheme:dark){
-      :root{--bg:linear-gradient(135deg,#071218,#062423);--card:rgba(8,16,16,0.55);--accent:#7fe3c9;--text:#d7fff0}
-      .card{box-shadow: none}
+      :root {--bg:linear-gradient(135deg,#071218,#062423);--card:rgba(8,16,16,0.55);--accent:#7fe3c9;--text:#d7fff0;--text-secondary:#a0f0e0;}
+      .card {box-shadow: none;}
     }
   </style>
 </head>
+
 <body>
   <main class="card" role="main" aria-labelledby="bienvenida">
     <h1 id="bienvenida">BIENVENIDA A TU ESPACIO SEGURO</h1>
@@ -45,7 +57,7 @@
     <div class="small">Creado para uso educativo. Pulsa "Entrar" para continuar.</div>
     <button class="enter-btn" onclick="entrar()" aria-label="Entrar al espacio">Entrar</button>
 
-    <!-- NUEVAS SECCIONES -->
+    <!-- Secciones ocultas que se muestran al entrar -->
     <div id="secciones" style="display:none;">
       <button class="section-btn" onclick="mostrarSeccion('narcisista')">¿Qué es un narcisista?</button>
       <button class="section-btn" onclick="mostrarSeccion('pareja')">¿Cómo saber si mi pareja es narcisista?</button>
@@ -58,6 +70,11 @@
       <div id="pareja" class="section">
         <h2>¿Cómo saber si mi pareja es narcisista?</h2>
         <p>Algunas señales incluyen: manipulación emocional, poca consideración por tus sentimientos, necesidad constante de atención y dificultad para aceptar críticas.</p>
+      </div>
+
+      <!-- Video de YouTube -->
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/watch?v=gXVRvBGfU5s&t=9s" title="Video sobre narcisismo" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
