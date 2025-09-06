@@ -65,20 +65,19 @@
         }
 
         /* --- HERO CON IMAGEN DE FONDO --- */
-       /* --- HERO CON IMAGEN DE FONDO --- */
-.hero-container {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    background: url('fondo.png') no-repeat center center;
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    overflow: hidden;
-    z-index: 0;
-}
+        .hero-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: url('./images/fondo.png') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            z-index: 0;
+        }
         
         .hero-overlay {
             position: absolute;
@@ -291,6 +290,51 @@
             border: 0;
         }
 
+        /* --- ESTILOS DE FORMULARIO --- */
+        .form-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            text-align: left;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .form-section label {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        .form-section input, .form-section textarea {
+            padding: 0.75rem;
+            border: 1px solid var(--text-secondary);
+            border-radius: 8px;
+            background: var(--card-bg-light);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .form-section input:focus, .form-section textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(93, 126, 130, 0.2);
+        }
+        .form-section textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        .form-section button.btn {
+            align-self: flex-start;
+            margin-top: 1rem;
+        }
+        @media (prefers-color-scheme: dark) {
+            .form-section input, .form-section textarea {
+                border-color: var(--text-secondary);
+                background: var(--card-bg-dark);
+            }
+        }
 
         footer {
             margin-top: 2rem;
@@ -307,12 +351,14 @@
     <section class="hero-container active">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1>Bienvenida/o a Tu Espacio Seguro</h1>
+            <h1>Bienvenida a Tu Espacio Seguro</h1>
             <p>Un refugio para informarte, sanar y recuperar tu voz.</p>
             <div class="nav-buttons">
                 <button class="btn" data-target="narcisista">¿Qué es un narcisista?</button>
                 <button class="btn" data-target="pareja">¿Mi pareja es narcisista?</button>
                 <button class="btn" data-target="sanar">Pasos para Sanar</button>
+                <button class="btn" data-target="preguntas">Haz una pregunta</button>
+                <button class="btn" data-target="historias">Comparte tu historia</button>
             </div>
         </div>
     </section>
@@ -322,7 +368,7 @@
         
         <h3>Video: El primer paso para entender</h3>
         <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/gXVRvBGfU5s?rel=0" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/[ID_DE_TU_VIDEO_AQUI]?rel=0" allowfullscreen></iframe>
         </div>
         
         <p>El término <strong>narcisista</strong> describe a alguien con un patrón de comportamiento centrado en sí mismo. Las características incluyen:</p>
@@ -368,7 +414,7 @@
 
         <h3>Video: Reconociendo las señales</h3>
         <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/gXVRvBGfU5s?si=kqNSIFUIc2U7lF5R" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/[ID_DE_TU_VIDEO_AQUI]?rel=0" allowfullscreen></iframe>
         </div>
 
         <div>
@@ -410,6 +456,48 @@
 
         <div class="tip">Tu bienestar es tu prioridad. Un terapeuta puede ayudarte a navegar este proceso de manera segura.</div>
 
+        <div class="nav-buttons">
+            <button class="btn" data-target="intro">Regresar</button>
+        </div>
+    </section>
+
+    <section class="content-section" data-section="preguntas">
+        <h2>Haz una pregunta</h2>
+        <p>¿Tienes dudas sobre los temas de narcisismo, sanación o relaciones? Escribe tu inquietud y pronto la revisaremos.</p>
+        <form class="form-section" id="form-preguntas">
+            <div class="form-group">
+                <label for="pregunta-texto">Tu pregunta *</label>
+                <textarea id="pregunta-texto" name="pregunta-texto" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="pregunta-nombre">Tu nombre (opcional)</label>
+                <input type="text" id="pregunta-nombre" name="pregunta-nombre">
+            </div>
+            <button class="btn" type="submit">Enviar pregunta</button>
+        </form>
+        <div class="nav-buttons">
+            <button class="btn" data-target="intro">Regresar</button>
+        </div>
+    </section>
+
+    <section class="content-section" data-section="historias">
+        <h2>Comparte tu historia</h2>
+        <p>Tu voz puede inspirar a otras personas. Escribe tu testimonio de sanación y ayúdanos a construir un espacio de apoyo.</p>
+        <form class="form-section" id="form-historias">
+            <div class="form-group">
+                <label for="historia-texto">Tu historia *</label>
+                <textarea id="historia-texto" name="historia-texto" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="historia-nombre">Tu nombre (opcional)</label>
+                <input type="text" id="historia-nombre" name="historia-nombre">
+            </div>
+            <div class="form-group">
+                <label for="historia-email">Tu correo (opcional)</label>
+                <input type="email" id="historia-email" name="historia-email">
+            </div>
+            <button class="btn" type="submit">Enviar historia</button>
+        </form>
         <div class="nav-buttons">
             <button class="btn" data-target="intro">Regresar</button>
         </div>
@@ -470,6 +558,7 @@
         document.getElementById('resultModal').classList.remove('active');
     }
 
+    // --- LÓGICA DE CUESTIONARIOS Y FORMULARIOS ---
     function mostrarResultado(qName){
         const radios = document.getElementsByName(qName);
         let selected = null;
@@ -491,7 +580,6 @@
                     message = "Es normal sentirse abrumado si esta información es completamente nueva para ti. <strong>Queremos que sepas que no estás solo/a y que no tienes por qué procesarlo todo de golpe.</strong> Tómate un momento, respira, y cuando te sientas listo/a, explora los 'Pasos para Sanar'. Tu bienestar es nuestra prioridad.";
                 }
             } else if (qName === 'q2') {
-                // TODO: Reemplaza este mensaje con una respuesta diseñada para esta sección
                 title = "Tu selección: " + selected;
                 message = "Esta es una respuesta temporal para el segundo checklist. Desarrollaremos mensajes específicos aquí también.";
             }
@@ -500,6 +588,26 @@
             alert("Selecciona una opción para ver el resultado.");
         }
     }
+
+    // Lógica para formularios
+    const formPreguntas = document.getElementById('form-preguntas');
+    const formHistorias = document.getElementById('form-historias');
+
+    formPreguntas.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const title = "¡Gracias por tu pregunta!";
+        const message = "Pronto la revisaremos y, si es adecuada para el sitio, será respondida.";
+        mostrarModal(title, message);
+        formPreguntas.reset();
+    });
+
+    formHistorias.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const title = "¡Gracias por compartir tu historia!";
+        const message = "Tu voz puede inspirar a otras personas. Tu testimonio es un acto de valentía.";
+        mostrarModal(title, message);
+        formHistorias.reset();
+    });
 </script>
 
 </body>
