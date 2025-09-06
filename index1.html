@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Espacio Seguro | Conecta y Sana</title>
+    <meta name="description" content="Recursos y guías para entender y superar el comportamiento narcisista. Un lugar para sanar, conectar y recuperar tu bienestar emocional.">
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- VARIABLES Y FUENTES --- */
+        :root {
+            --primary-color: #5d7e82; /* Verde azulado profundo */
+            --accent-color: #f7b267; /* Dorado cálido */
+            --text-color: #2c3e50;
+            --text-secondary: #586a7c;
+            --shadow-light: 0 4px 15px rgba(0,0,0,0.05);
+            --shadow-strong: 0 10px 30px rgba(0,0,0,0.1);
+            --bg-color-light: #f0f4f7;
+            --bg-color-dark: #1a232f;
+            --card-bg-light: #ffffff;
+            --card-bg-dark: #2d3e50;
+            --overlay-color: rgba(0, 0, 0, 0.4);
+            
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-size: 16px;
+        }
+
+        /* --- DARK MODE --- */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary-color: #72a39a;
+                --accent-color: #ffd8a1;
+                --text-color: #e0e6ec;
+                --text-secondary: #aeb9c4;
+                --bg-color-light: #1a232f;
+                --card-bg-light: #2d3e50;
+                --overlay-color: rgba(0, 0, 0, 0.6);
+            }
+        }
+
+        /* --- ESTILOS GENERALES Y LAYOUT --- */
+        html, body {height: 100%; margin: 0; padding: 0;}
+        body {
+            background: var(--bg-color-light);
+            color: var(--text-color);
+            transition: background-color 0.3s ease;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        /* --- HERO CON IMAGEN DE FONDO --- */
+        .hero-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: url('./images/fondo.png') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--overlay-color);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+        }
+        
+        .hero-container h1, .hero-container p {
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-container h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            line-height: 1.2;
+            margin: 0;
+        }
+        
+        .hero-container p {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: var(--shadow-light);
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        /* --- SECCIONES DE CONTENIDO --- */
+        .content-section {
+            display: none;
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg-light);
+            border-radius: 12px;
+            box-shadow: var(--shadow-strong);
+        }
+        .content-section.active {display: block;}
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-top: 2rem;
+        }
+        
+        p, ul, li {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .tip {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-left: 5px solid var(--accent-color);
+            border-radius: 10px;
+            font-style: italic;
+            margin-top: 1.5rem;
+        }
+
+        /* --- CHECKLIST --- */
+        .checklist-item {
+            display: block; 
+            margin: 8px 0;
+            color: var(--text-color);
+        }
+        
+        .result-button {
+            margin-top: 10px;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: none;
+            background: var(--accent-color);
+            color: var(--text-color);
+            cursor: pointer;
+            display: block;
+        }
+
+        /* AJUSTE PARA CONTRASTE DEL BOTÓN EN MODO OSCURO */
+        @media (prefers-color-scheme: dark) {
+             .result-button {
+                color: #1a1a1a;
+            }
+        }
+        
+        .result-button:hover {
+            opacity: 0.9;
+        }
+
+        /* --- MODAL DE RESULTADOS --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 1000;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: var(--card-bg-light);
+            color: var(--text-color);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: var(--shadow-strong);
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .modal-content h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+        }
+        .modal-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .modal-content strong {
+            color: #000;
+            font-weight: 700;
+        }
+        @media (prefers-color-scheme: dark) {
+            .modal-content strong {
+                color: var(--accent-color);
+            }
+        }
+        .modal-close-btn {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .modal-close-btn:hover {
+            background: var(--primary-color);
+        }
+
+        /* --- ESTILO PARA VIDEOS RESPONSIVOS --- */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            margin: 2rem 0;
+            border-radius: 12px;
+            box-shadow: var(--shadow-strong);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+
+        footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+
+<body>
+
+<main>
+    <section class="hero-container active">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Bienvenida a Tu Espacio Seguro</h1>
+            <p>Un refugio para informarte, sanar y recuperar tu voz.</p>
+            <div class="nav-buttons">
+                <button class="btn" data-target="narcisista">¿Qué es un narcisista?</button>
+                <button class="btn" data-target="pareja">¿Mi pareja es narcisista?</button>
+                <button class="btn" data-target="sanar">Pasos para Sanar</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" data-section="narcisista">
+        <h2>¿Qué es un narcisista?</h2>
+        
+        <h3>Video: El primer paso para entender</h3>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/[ID_DE_TU_VIDEO_AQUI]?rel=0" allowfullscreen></iframe>
+        </div>
+        
+        <p>El término <strong>narcisista</strong> describe a alguien con un patrón de comportamiento centrado en sí mismo. Las características incluyen:</p>
+        <ul>
+            <li>Necesidad constante de admiración.</li>
+            <li>Falta de empatía hacia los demás.</li>
+            <li>Sentimiento de superioridad.</li>
+            <li>Dificultad con la crítica.</li>
+            <li>Explotación de relaciones para beneficio propio.</li>
+        </ul>
+
+        <div>
+            <p>Reflexión sobre la información, identificada/o:</p>
+            <label class="checklist-item">
+                <input type="radio" name="q1" value="conocido"> Ya conocía esta información
+            </label>
+            <label class="checklist-item">
+                <input type="radio" name="q1" value="parcial"> Me sonaba algo de esto
+            </label>
+            <label class="checklist-item">
+                <input type="radio" name="q1" value="nuevo"> No conocía nada de esto
+            </label>
+            <button class="result-button" onclick="mostrarResultado('q1')">Ver resultado</button>
+        </div>
+
+        <div class="tip">Identificar estos patrones ayuda a proteger tu bienestar emocional.</div>
+
+        <div class="nav-buttons">
+            <button class="btn" data-target="intro">Regresar</button>
+        </div>
+    </section>
+
+    <section class="content-section" data-section="pareja">
+        <h2>¿Cómo saber si mi pareja es narcisista?</h2>
+        <p>Señales frecuentes:</p>
+        <ul>
+            <li>Idealización inicial seguida de desvalorización.</li>
+            <li>Falta de empatía y atención a tus emociones.</li>
+            <li>Manipulación emocional o “gaslighting”.</li>
+            <li>Celos o posesividad excesiva.</li>
+            <li>Incapacidad de pedir disculpas.</li>
+        </ul>
+
+        <h3>Video: Reconociendo las señales</h3>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/[gXVRvBGfU5s]?rel=0" allowfullscreen></iframe>
+        </div>
+
+        <div>
+            <p>Reflexión sobre tu pareja, identificada/o:</p>
+            <label class="checklist-item">
+                <input type="radio" name="q2" value="mucho"> Esto me recuerda mucho a mi pareja
+            </label>
+            <label class="checklist-item">
+                <input type="radio" name="q2" value="poco"> Esto me recuerda un poco a mi pareja
+            </label>
+            <label class="checklist-item">
+                <input type="radio" name="q2" value="nada"> Esto no me recuerda nada a mi pareja
+            </label>
+            <button class="result-button" onclick="mostrarResultado('q2')">Ver resultado</button>
+        </div>
+
+        <div class="tip">Recuerda: la base de una relación sana es respeto, empatía y comunicación.</div>
+
+        <div class="nav-buttons">
+            <button class="btn" data-target="intro">Regresar</button>
+        </div>
+    </section>
+
+    <section class="content-section" data-section="sanar">
+        <h2>Pasos para Sanar</h2>
+        
+        <h3>Video: Tu camino hacia la sanación</h3>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/[ID_DE_TU_VIDEO_AQUI]?rel=0" allowfullscreen></iframe>
+        </div>
+
+        <p>Sanar después de una relación tóxica es un proceso valiente:</p>
+        <ul>
+            <li>Establece límites claros.</li>
+            <li>Reconecta contigo misma/o.</li>
+            <li>Busca apoyo de personas de confianza o profesionales.</li>
+            <li>Sé amable contigo y celebra avances.</li>
+        </ul>
+
+        <div class="tip">Tu bienestar es tu prioridad. Un terapeuta puede ayudarte a navegar este proceso de manera segura.</div>
+
+        <div class="nav-buttons">
+            <button class="btn" data-target="intro">Regresar</button>
+        </div>
+    </section>
+
+</main>
+
+<footer>&copy; Tu Espacio Seguro</footer>
+
+<div id="resultModal" class="modal-overlay" onclick="ocultarModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <h3 id="modalTitle"></h3>
+        <p id="modalMessage"></p>
+        <button class="modal-close-btn" onclick="ocultarModal()">Regresar</button>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const showSection = (id) => {
+            document.querySelectorAll('.content-section, .hero-container').forEach(sec => sec.classList.remove('active'));
+            if(id === 'intro'){
+                document.querySelector('.hero-container').classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                const target = document.querySelector(`[data-section="${id}"]`);
+                if(target){
+                    target.classList.add('active');
+                    target.scrollIntoView({behavior:'smooth', block:'start'});
+                }
+            }
+        };
+
+        document.body.addEventListener('click', e => {
+            const btn = e.target.closest('.btn');
+            if(btn){
+                const targetId = btn.getAttribute('data-target');
+                if(targetId) showSection(targetId);
+            }
+        });
+
+        showSection('intro');
+    });
+
+    // --- FUNCIONES DEL MODAL ---
+    function mostrarModal(title, message) {
+        const modal = document.getElementById('resultModal');
+        document.getElementById('modalTitle').textContent = title;
+        document.getElementById('modalMessage').innerHTML = message;
+        modal.classList.add('active');
+    }
+
+    function ocultarModal(event) {
+        if (event && event.target !== event.currentTarget) {
+            return;
+        }
+        document.getElementById('resultModal').classList.remove('active');
+    }
+
+    function mostrarResultado(qName){
+        const radios = document.getElementsByName(qName);
+        let selected = null;
+        radios.forEach(r => {if(r.checked) selected = r.value;});
+
+        let title = "";
+        let message = "";
+
+        if(selected){
+            if (qName === 'q1') {
+                if (selected === 'conocido') {
+                    title = "¡Gran fortaleza y conocimiento!";
+                    message = "Validar tu conocimiento es un paso crucial en tu proceso de sanación. <strong>Reconocer estos patrones es un acto de valentía y un reflejo de tu resiliencia.</strong> Continúa fortaleciendo tu voz y empoderándote en este camino. Estamos aquí para ti.";
+                } else if (selected === 'parcial') {
+                    title = "Tu intuición te guía.";
+                    message = "Ese 'algo que te sonaba' es tu intuición hablándote. <strong>Explorar esta información es el primer paso para entender una dinámica que tal vez ya sentías.</strong> Te invitamos a seguir navegando por el sitio para darle un nombre a lo que has vivido y encontrar las herramientas para sanar.";
+                } else if (selected === 'nuevo') {
+                    title = "Respira. Estás en un espacio seguro.";
+                    message = "Es normal sentirse abrumado si esta información es completamente nueva para ti. <strong>Queremos que sepas que no estás solo/a y que no tienes por qué procesarlo todo de golpe.</strong> Tómate un momento, respira, y cuando te sientas listo/a, explora los 'Pasos para Sanar'. Tu bienestar es nuestra prioridad.";
+                }
+            } else if (qName === 'q2') {
+                // TODO: Reemplaza este mensaje con una respuesta diseñada para esta sección
+                title = "Tu selección: " + selected;
+                message = "Esta es una respuesta temporal para el segundo checklist. Desarrollaremos mensajes específicos aquí también.";
+            }
+            mostrarModal(title, message);
+        } else {
+            alert("Selecciona una opción para ver el resultado.");
+        }
+    }
+</script>
+
+</body>
+</html>
